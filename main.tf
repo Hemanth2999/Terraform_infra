@@ -82,7 +82,7 @@ resource "aws_security_group" "SG-Block" {
 
 
 resource "aws_instance" "My-web" {
-  ami = "ami-0b0dcb5067f052a63"
+  ami = "${var.amis}"
   availability_zone = "${var.azs}"
   instance_type = "t2.micro"
   key_name = "${var.aws_key_name}"
