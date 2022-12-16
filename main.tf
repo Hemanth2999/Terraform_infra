@@ -1,11 +1,11 @@
 provider "aws" {
-    access_key = "AKIA2KQBDCDGJ47EVDOK"
-    secret_key = "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"
-    region = "us-east-1"
+    access_key = "${var.aws_access_key}"
+    secret_key = "${var.aws_secrete_key}"
+    region = "${var.aws_region}"
 }
 
 resource "aws_vpc" "vpc-block" {
-    cidr_block = "${var.aws_cidr_block}"
+    cidr_block = "${var.aws_cider_block}"
     enable_dns_hostnames = true
     tags = {
         Name = "${var.vpc_name}"
@@ -23,6 +23,7 @@ resource "aws_subnet" "public-subnet1" {
     vpc_id = "${aws_vpc.vpc-block.id}"
     cidr_block = "${var.aws_public_subnet1_cidr}"
     availability_zone = "us-east-1a"
+
     tags = {
         Name = "${var.aws_public_subnet1_name}"
     }
@@ -32,6 +33,7 @@ resource "aws_subnet" "public-subnet2" {
     vpc_id = "${aws_vpc.vpc-block.id}"
     cidr_block = "${var.aws_public_subnet2_cidr}"
     availability_zone = "us-east-1a"
+
     tags = {
         Name = "${var.aws_public_subnet2_name}"
     }
@@ -46,7 +48,6 @@ resource "aws_route_table" "RT-Block" {
     }
 
     tags = {
-
         Name = "${var.aws_route_table}"
     }
 }
@@ -81,13 +82,14 @@ resource "aws_security_group" "SG-Block" {
 
 
 resource "aws_instance" "My-web" {
-  ami = "${var.amis}"
+  ami = "ami-0b0dcb5067f052a63"
   availability_zone = "${var.azs}"
-  instance_type = "${var.instance_type}"
+  instance_type = "t2.micro"
   key_name = "${var.aws_key_name}"
   subnet_id = "${aws_subnet.public-subnet1.id}"
   vpc_security_group_ids = [ "${aws_security_group.SG-Block.id}" ]
   associate_public_ip_address = "true"
+
   tags = {
     Name = "server-1"
     Owner = "Hemanth"
