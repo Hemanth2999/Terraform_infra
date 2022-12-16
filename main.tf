@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_vpc" "vpc-block" {
-    cidr_block = "${var.aws_cider_block}"
+    cidr_block = "${var.aws_cidr_block}"
     enable_dns_hostnames = true
     tags = {
         Name = "${var.vpc_name}"
