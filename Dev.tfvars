@@ -1,5 +1,5 @@
-aws_access_key = "AKIA2KQBDCDGO77NMGNJ"
-aws_secrete_key = "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"
+aws_access_key = "AKIA2KQBDCDGH3Y4BNC5"
+aws_secrete_key = "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"
 aws_region = "us-east-1"
 vpc_name = "myvpc"
 aws_cidr_block = "192.168.0.0/16"
